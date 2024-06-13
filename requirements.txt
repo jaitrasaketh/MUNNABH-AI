@@ -1,0 +1,8 @@
+ctransformers
+sentence-transformers==2.2.2
+pinecone-client
+langchain
+langchain-community
+flask
+langchain_pinecone
+pypdf
