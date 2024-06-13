@@ -6,4 +6,5 @@ langchain-community
 flask
 langchain_pinecone
 pypdf
+python-dotenv
 -e .
