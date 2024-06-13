@@ -1,0 +1,4 @@
+You may need to download the phi-2 4-bit quantized model which was used for this project
+
+URL 1 (direct download): https://huggingface.co/TheBloke/phi-2-GGUF/resolve/main/phi-2.Q4_0.gguf
+URL 2 (model page): https://huggingface.co/TheBloke/phi-2-GGUF/blob/main/phi-2.Q4_0.gguf
