@@ -3,7 +3,7 @@ from src.helper import download_embedding
 
 from langchain_pinecone import PineconeVectorStore
 
-from langchain.llms import CTransformers # Using ctransfomers since we are using a quantized model
+from langchain_community.llms import CTransformers # Using ctransfomers since we are using a quantized model
 
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains import create_retrieval_chain
