@@ -2,7 +2,6 @@ from IPython import embed
 from src.helper import load_pdf, text_splitter, download_embedding
 from langchain_pinecone import PineconeVectorStore
 from dotenv import load_dotenv
-import os
 
 load_dotenv()
 
@@ -16,11 +15,11 @@ split_text = text_splitter(pdf_data)
 embeddings = download_embedding()
 
 
-# Create embeddings
+# Create and store embeddings
 index_name = "medical-chatbot"
-vectorstore = PineconeVectorStore(embedding = embeddings, index_name = index_name)
+vectorstore = PineconeVectorStore.from_documents(split_text, embeddings, index_name = index_name)
 
 print('\n',vectorstore.similarity_search("What is the treatment for Diabetes?"))
 
-# For creating a sementic index if it does not exist.
-# vectorstore = PineconeVectorStore.from_documents(split_data, embeddings, index_name = index_name)
+# For using the embedding that are already created.
+# vectorstore = PineconeVectorStore(embedding = embeddings, index_name = index_name)
