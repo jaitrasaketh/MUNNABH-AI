@@ -1,4 +1,3 @@
-ctransformers
 sentence-transformers==2.2.2
 pinecone-client
 langchain
@@ -7,4 +6,5 @@ flask
 langchain_pinecone
 pypdf
 python-dotenv
+llama-cpp-python
 -e .

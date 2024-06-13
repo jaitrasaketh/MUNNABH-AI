@@ -3,7 +3,8 @@ from src.helper import download_embedding
 
 from langchain_pinecone import PineconeVectorStore
 
-from langchain_community.llms import CTransformers # Using ctransfomers since we are using a quantized model
+# from langchain_community.llms import CTransformers # Using ctransfomers since we are using a quantized model
+from langchain_community.llms import LlamaCpp
 
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains import create_retrieval_chain
@@ -26,16 +27,22 @@ retriever = vectorstore.as_retriever()
 # Create the prompt template for the llm to process.
 PROMPT = ChatPromptTemplate.from_messages(
     [
-        ("system", prompt_template), 
+        ("system", diagnosis_template), 
         ("human", "{input}")
     ]
 )
 
 # Create a ctransformers model of the llm
-llm = CTransformers(model = "model/llama-2-7b-chat.ggmlv3.q4_0.bin",
-                    model_type = "llama",
-                    config = {'max_new_tokens': 512,
-                              'temperature': 0.8})
+# llm = CTransformers(model = "model/llama-2-7b-chat.ggmlv3.q4_0.bin",
+#                     model_type = "llama",
+#                     config = {'max_new_tokens': 512,
+#                               'temperature': 0.8})
+
+llm = LlamaCpp(
+    model_path="model/phi-2.Q4_0.gguf",
+    temperature=0.75,
+    max_tokens=2000
+)
 
 question_answer_chain = create_stuff_documents_chain(llm, PROMPT)
 chain = create_retrieval_chain(retriever, question_answer_chain)
