@@ -6,3 +6,4 @@ langchain-community
 flask
 langchain_pinecone
 pypdf
+-e .
