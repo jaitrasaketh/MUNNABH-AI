@@ -40,9 +40,19 @@ llm = CTransformers(model = "model/llama-2-7b-chat.ggmlv3.q4_0.bin",
 question_answer_chain = create_stuff_documents_chain(llm, PROMPT)
 chain = create_retrieval_chain(retriever, question_answer_chain)
 
-@app.route('/')
+
+@app.route("/")
 def home():
     return render_template('chat.html')
 
+@app.route("/get", methods=["POST", "GET"])
+def chat():
+    msg = request.form['msg']
+    input = msg
+    print(input)
+    result = chain.invoke({"input": input})
+    print("Response : ",result["answer"])
+    return result["answer"]
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port = 8080, debug = True)
