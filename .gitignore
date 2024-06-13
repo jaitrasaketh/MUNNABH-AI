@@ -162,4 +162,4 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-model/phi-2.Q4_0.gguf
+backend/model/phi-2.Q4_0.gguf
