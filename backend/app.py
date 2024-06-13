@@ -11,10 +11,13 @@ from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from dotenv import load_dotenv
 from src.prompt import *
+import os
 
 load_dotenv()
 
 app = Flask(__name__)
+
+os.environ['PINECONE_API_KEY'] = "d0ccc28f-3d45-4cff-989a-ff83b043add8"
 
 # Download the embedding model
 embeddings = download_embedding()
@@ -39,7 +42,7 @@ PROMPT = ChatPromptTemplate.from_messages(
 #                               'temperature': 0.8})
 
 llm = LlamaCpp(
-    model_path="model/phi-2.Q4_0.gguf",
+    model_path="backend/model/phi-2.Q4_0.gguf",
     temperature=0.75,
     max_tokens=2000
 )
