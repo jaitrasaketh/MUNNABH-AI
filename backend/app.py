@@ -43,8 +43,8 @@ PROMPT = ChatPromptTemplate.from_messages(
 
 llm = LlamaCpp(
     model_path="backend/model/phi-2.Q4_0.gguf",
-    temperature=0.75,
-    max_tokens=2000
+    temperature=0.01,
+    n_ctx = 2048
 )
 
 question_answer_chain = create_stuff_documents_chain(llm, PROMPT)
