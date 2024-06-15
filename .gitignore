@@ -163,3 +163,4 @@ cython_debug/
 #.idea/
 
 backend/model/phi-2.Q4_0.gguf
+backend/data/Medical_book.pdf
