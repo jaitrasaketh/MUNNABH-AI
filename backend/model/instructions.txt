@@ -1,4 +1,4 @@
-You need to download the phi-2 4-bit quantized model which was used for this project
+If you wish to run the llm engine locally, you can run with the phi-2-chat 4-bit quantized model.
 
 URL 1 (direct download): https://huggingface.co/TheBloke/phi-2-GGUF/resolve/main/phi-2.Q4_0.gguf
 URL 2 (model page): https://huggingface.co/TheBloke/phi-2-GGUF/blob/main/phi-2.Q4_0.gguf
