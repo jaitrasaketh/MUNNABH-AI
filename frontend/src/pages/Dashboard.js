@@ -5,7 +5,6 @@ import logo from 'C:/Users/jaisa/OneDrive/Desktop/Projects/Reactjs/AIChatbot/fro
 const Dashboard = () => {
     const [prompt, setPrompt] = useState('');
     const [image, setImage] = useState(null);
-    const [chats, setChats] = useState([]);
     const [currentConversation, setCurrentConversation] = useState([]);
     const [isTyping, setIsTyping] = useState(false);
     const textareaRef = useRef(null);
@@ -30,14 +29,27 @@ const Dashboard = () => {
         }
     };
 
-    const handlePromptSubmit = () => {
+    const handlePromptSubmit = async () => {
         if (prompt.trim() !== '' || image) {
             const newConversation = currentConversation ? [...currentConversation] : [];
             if (prompt.trim() !== '') {
                 newConversation.push({ sender: 'You', message: prompt.trim() });
+                await fetch('http://localhost:8000/query/message', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ query: prompt.trim() }),
+                });
             }
             if (image) {
                 newConversation.push({ sender: 'You', image });
+                const formData = new FormData();
+                formData.append('image', fileInputRef.current.files[0]);
+                await fetch('http://localhost:8000/query/upload-image', {
+                    method: 'POST',
+                    body: formData,
+                });
                 setImage(null); // Reset image after submission
             }
 
@@ -81,28 +93,25 @@ const Dashboard = () => {
         }
     };
 
-    const handleDiagnose = () => {
+    const handleDiagnose = async () => {
         console.log('Diagnose button clicked');
+        await fetch('http://localhost:8000/query/select/diagnose', {
+            method: 'POST',
+        });
     };
 
-    const handleTreat = () => {
+    const handleTreat = async () => {
         console.log('Treat button clicked');
+        await fetch('http://localhost:8000/query/select/treat', {
+            method: 'POST',
+        });
     };
 
-    const handleAsk = () => {
+    const handleAsk = async () => {
         console.log('Ask button clicked');
-    };
-
-    const handleConversationClick = (chat) => {
-        setCurrentConversation(chat.conversation);
-    };
-
-    const handleNewConversation = () => {
-        if (currentConversation.length > 0) {
-            const timestamp = new Date().toLocaleString();
-            setChats([{ timestamp, conversation: [...currentConversation] }, ...chats]);
-        }
-        setCurrentConversation([]);
+        await fetch('http://localhost:8000/query/select/ask', {
+            method: 'POST',
+        });
     };
 
     const triggerFileInput = () => {
@@ -111,16 +120,6 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard-container">
-            <div className="menu">
-                <h2>MunnaBh-AI</h2>
-                <ul>
-                    {chats.map((chat, index) => (
-                        <li key={index} onClick={() => handleConversationClick(chat)}>
-                            <strong>Conversation {chats.length - index}:</strong> {chat.timestamp}
-                        </li>
-                    ))}
-                </ul>
-            </div>
             <div className="content">
                 <div className="button-area">
                     <button className="action-button" onClick={handleDiagnose}>Diagnose</button>
@@ -159,9 +158,6 @@ const Dashboard = () => {
                         </div>
                     ))}
                     {isTyping && <div className="chat-message AI"><strong>AI:</strong> typing...</div>}
-                </div>
-                <div className="new-conversation">
-                    <button className="new-conversation-button" onClick={handleNewConversation}>+</button>
                 </div>
             </div>
         </div>
