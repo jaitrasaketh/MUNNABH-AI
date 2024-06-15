@@ -13,11 +13,6 @@ from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from dotenv import load_dotenv
 from src.prompt_templates import *
-import os
-
-load_dotenv()
-
-os.environ['PINECONE_API_KEY'] = "d0ccc28f-3d45-4cff-989a-ff83b043add8"
 
 
 # Download the embedding model

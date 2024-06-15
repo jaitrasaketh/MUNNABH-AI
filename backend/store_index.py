@@ -15,10 +15,11 @@ embeddings = download_embedding()
 
 
 # Create and store embeddings
+# Please do not run this code unless you want to create a new index with your own data and API key.
 index_name = "medical-chatbot"
-# vectorstore = PineconeVectorStore.from_documents(split_text, embeddings, index_name = index_name)
-
-# print('\n',vectorstore.similarity_search("What is the treatment for Diabetes?"))
+vectorstore = PineconeVectorStore.from_documents(split_text, embeddings, index_name = index_name)
 
 # For using the embedding that are already created.
-vectorstore = PineconeVectorStore(embedding = embeddings, index_name = index_name)
+# vectorstore = PineconeVectorStore(embedding = embeddings, index_name = index_name)
+
+# print('\n',vectorstore.similarity_search("What is the treatment for Diabetes?"))

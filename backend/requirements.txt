@@ -7,4 +7,5 @@ langchain_pinecone
 pypdf
 python-dotenv
 mistralai
+# For local deployment of llm model
 # llama-cpp-python

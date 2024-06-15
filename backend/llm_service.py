@@ -9,8 +9,11 @@ from .src.prompt_templates import *
 
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
+import os
 
 class LLMService:
+    
+    #Legacy implementation
     # def __init__(self):
         # self.embeddings = download_embedding()
         # self.vectorstore = PineconeVectorStore(embedding=self.embeddings, index_name="medical-chatbot")
@@ -19,14 +22,17 @@ class LLMService:
         # self.llm = LlamaCpp(model_path=Config.MODEL_PATH, temperature=0.01, n_ctx=512, n_predict=100, top_p=0.9, n_keep=150)
         # self.question_answer_chain = create_stuff_documents_chain(self.llm, self.prompt)
         # self.chain = create_retrieval_chain(self.retriever, self.question_answer_chain)
+
+    # def handle_query(self, query_input):
+    #     result = self.chain.invoke({"input": query_input})
+    #     return result
+
+
     def __init__(self):
         self.embeddings = download_embedding()
         self.vectorstore = PineconeVectorStore(embedding=self.embeddings, index_name="medical-chatbot")
         self.prompt = diagnosis.template # default template
 
-    # def handle_query(self, query_input):
-    #     result = self.chain.invoke({"input": query_input})
-    #     return result
 
     def vector_search(self, query):
         return self.vectorstore.similarity_search(query)
@@ -43,12 +49,14 @@ class LLMService:
         else:
             raise ValueError(f"Template {template_name} not found")
 
+
     def get_prompt_template(self):
         return self.prompt
 
+
     @staticmethod
     def get_mistral(user_message, model="mistral-large-latest", is_json=False):
-        client = MistralClient(api_key="Tbn8jaY00qC3zjedAVmwnuIwPsGb004j")
+        client = MistralClient(api_key=os.getenv("MISTRAL_API_KEY"))
         messages = [ChatMessage(role="user", content=user_message)]
 
         if is_json:

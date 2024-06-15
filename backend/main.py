@@ -17,8 +17,6 @@ app.add_middleware(
 
 app.include_router(query.router)
 
-
-
 @app.get("/")
 def home():
     return "Welcome to the chatbot!"
