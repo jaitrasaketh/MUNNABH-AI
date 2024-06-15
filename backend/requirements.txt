@@ -2,9 +2,9 @@ sentence-transformers==2.2.2
 pinecone-client
 langchain
 langchain-community
-flask
+fastapi[all]
 langchain_pinecone
 pypdf
 python-dotenv
-llama-cpp-python
--e .
+mistralai
+# llama-cpp-python
