@@ -11,9 +11,7 @@ list_of_files = [
     '.env',
     'setup.py',
     'app.py',
-    'store_index.py',
-    'static/.gitkeep',
-    'templates/chat.html'
+    'store_index.py'
 ]
 
 

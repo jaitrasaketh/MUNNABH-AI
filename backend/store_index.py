@@ -1,4 +1,3 @@
-from IPython import embed
 from src.helper import load_pdf, text_splitter, download_embedding
 from langchain_pinecone import PineconeVectorStore
 from dotenv import load_dotenv
@@ -22,4 +21,4 @@ index_name = "medical-chatbot"
 # print('\n',vectorstore.similarity_search("What is the treatment for Diabetes?"))
 
 # For using the embedding that are already created.
-# vectorstore = PineconeVectorStore(embedding = embeddings, index_name = index_name)
+vectorstore = PineconeVectorStore(embedding = embeddings, index_name = index_name)
