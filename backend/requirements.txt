@@ -7,5 +7,10 @@ langchain_pinecone
 pypdf
 python-dotenv
 mistralai
+tensorflow
+pandas
+numpy
+nibabel
+matplotlib
 # For local deployment of llm model
 # llama-cpp-python
