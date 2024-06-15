@@ -3,5 +3,5 @@ An AI-Chatbot for Microsoft Hackathon
 
 backend installation:
 ```
-pip install -r requirements.txt
+pip install -r backend\requirements.txt
 ```
