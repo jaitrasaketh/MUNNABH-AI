@@ -4,7 +4,6 @@ langchain
 langchain-community
 langchain_pinecone
 fastapi[all]
-python-dotenv
 mistralai
 tensorflow==2.8.0
 keras==2.8.0rc
