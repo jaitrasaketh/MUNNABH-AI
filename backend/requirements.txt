@@ -12,5 +12,6 @@ pandas
 numpy
 nibabel
 matplotlib
+pandas
 # For local deployment of llm model
 # llama-cpp-python
