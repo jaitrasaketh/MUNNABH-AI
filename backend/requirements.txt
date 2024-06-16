@@ -2,16 +2,19 @@ sentence-transformers==2.2.2
 pinecone-client
 langchain
 langchain-community
-fastapi[all]
 langchain_pinecone
-pypdf
+fastapi[all]
 python-dotenv
 mistralai
-tensorflow
+tensorflow==2.8.0
+keras==2.8.0rc
 pandas
 numpy
 nibabel
 matplotlib
-pandas
+
 # For local deployment of llm model
 # llama-cpp-python
+
+# For loading any custom pdf data for using RAG against this data.
+# pypdf
