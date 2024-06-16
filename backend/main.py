@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .routers import query, image
+from .routers import query
 
 app = FastAPI()
 
@@ -16,7 +16,6 @@ app.add_middleware(
 )
 
 app.include_router(query.router)
-app.include_router(image.router)
 
 @app.get("/")
 def home():
