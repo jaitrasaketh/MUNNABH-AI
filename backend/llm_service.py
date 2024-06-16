@@ -56,7 +56,7 @@ class LLMService:
 
     @staticmethod
     def get_mistral(user_message, model="mistral-large-latest", is_json=False):
-        client = MistralClient(api_key=os.getenv("MISTRAL_API_KEY"))
+        client = MistralClient(api_key=Config.MISTRAL_API_KEY)
         messages = [ChatMessage(role="user", content=user_message)]
 
         if is_json:
