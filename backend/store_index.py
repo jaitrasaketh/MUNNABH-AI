@@ -1,8 +1,8 @@
 from src.helper import load_pdf, text_splitter, download_embedding
 from langchain_pinecone import PineconeVectorStore
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 
 # Load the data
 pdf_data = load_pdf("data/")
