@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Dashboard.css';
-import logo from 'C:/Users/jaisa/OneDrive/Desktop/Projects/Reactjs/AIChatbot/frontend/src/assests/AIlogo.png';
+import logo from '../assets/AIlogo.png';
 
 const Dashboard = ({ accessToken }) => {
   const [prompt, setPrompt] = useState('');
@@ -30,43 +30,57 @@ const Dashboard = ({ accessToken }) => {
   };
 
   const handlePromptSubmit = async () => {
-    if (prompt.trim() !== '' || image) {
-      const newConversation = currentConversation ? [...currentConversation] : [];
-      if (prompt.trim() !== '') {
-        newConversation.push({ sender: 'You', message: prompt.trim() });
-        await fetch('http://localhost:8000/query/message', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify({ query: prompt.trim() }),
-        });
-      }
-      if (image) {
-        newConversation.push({ sender: 'You', image });
-        const formData = new FormData();
-        formData.append('image', fileInputRef.current.files[0]);
-        await fetch('http://localhost:8000/query/upload-image', {
+    let query = prompt.trim();
+    let combinedQuery = query.trim();
+    const newConversation = currentConversation ? [...currentConversation] : [];
+  
+    // Step 1: Handle image upload if there's an image
+    if (image) {
+      newConversation.push({ sender: 'You', image });
+      const formData = new FormData();
+      formData.append('file', fileInputRef.current.files[0]);
+      try {
+        const response = await fetch('http://localhost:8000/query/classify_xray', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${accessToken}`,
           },
           body: formData,
         });
-        setImage(null); // Reset image after submission
+        const result = await response.json();
+        // Append the output of the image upload to the user's query
+        combinedQuery += " These are the results of the Chest-Xray. Please answer with the top 2 (or 3 if it is significant and do not give out the probabilities) most probable diagnosis in order that you can give (in 150 words): " + JSON.stringify(result);
+        // Removed the part where the x-ray classification result is added to the conversation
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        newConversation.push({ sender: 'AI', message: 'Error processing image.' });
       }
-
-      setCurrentConversation(newConversation);
-
-      setTimeout(() => {
-        setIsTyping(true);
-        const aiResponse = 'Wassup Dawg';
-        simulateTyping(aiResponse, newConversation);
-      }, 1000);
-
-      setPrompt('');
+      setImage(null); // Reset image after submission
     }
+  
+    // Proceed with sending the combined query to the /query/message endpoint
+    if (combinedQuery !== '') {
+      newConversation.push({ sender: 'You', message: query });
+      try {
+        const response = await fetch('http://localhost:8000/query/message', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify({ query: combinedQuery }),
+        });
+        const result = await response.json();
+        newConversation.push({ sender: 'AI', message: result.output });
+      } catch (error) {
+        console.error('Error fetching AI response:', error);
+        newConversation.push({ sender: 'AI', message: 'Sorry, something went wrong.' });
+      }
+    }
+  
+    // Update the conversation and reset the prompt
+    setCurrentConversation(newConversation);
+    setPrompt('');
   };
 
   const simulateTyping = (message, conversation) => {

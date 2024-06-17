@@ -166,3 +166,5 @@ cython_debug/
 backend/data/
 backend/data/Medical_book.pdf
 backend/model/brats_model.h5
+
+frontend/node_modules/
