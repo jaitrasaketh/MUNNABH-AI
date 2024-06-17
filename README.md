@@ -7,7 +7,6 @@
 4. [Installation](#installation)
 5. [Usage](#usage)
 6. [Configuration](#configuration)
-7. [Contributing](#contributing)
 8. [License](#license)
 9. [Contact](#contact)
 
@@ -40,6 +39,23 @@ Briefly describe the architecture of MunnaBh-AI, including the main components a
 2. Install dependencies:
    ```sh
     npm install
-    pip install -r requirements.txt]
+    pip install -r requirements.txt
+3. Start the application:
+   - uvicorn main:app --reload to start the backend.
+   - npm start to start the frontend.
+
+### Usage
+1. Start the application.
+2. Login using your Google Account.
+3. Interact with the chatbot to input symptoms, upload medical images, and receive diagnoses and recommendations.
+
+### License
+
+
+
+### Contributors
+  - Sri Jaitra Saketh Goparaju  f20220183@hyderabad.bits-pilani.ac.in
+  - Jeeru Harshith Reddy        f20220233@hyderabad.bits-pilani.ac.in
+   
 
      
