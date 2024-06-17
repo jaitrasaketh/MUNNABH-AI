@@ -1,13 +1,13 @@
 from fastapi import status, HTTPException, APIRouter
 from .. import schemas
 from ..service.llm_service import LLMService
+import requests
 
 # To load the CNN models
 from fastapi import UploadFile, File
 from fastapi.responses import JSONResponse
 import tensorflow as tf
 from ..service.cnn_service import CNNService
-
 
 router = APIRouter()
 
@@ -17,11 +17,18 @@ cnn_service.load_models()
 router = APIRouter(prefix="/query", tags=["query"])
 llm_service = LLMService()
 
+def get_google_fit_data():
+    url = "https://v1.nocodeapi.com/unlimited_power/fit/UAmylmNVsVXkcjWT/aggregatesDatasets?dataTypeName=steps_count,active_minutes,calories_expended,heart_minutes,sleep_segment,weight,activity_summary"
+    params = {}
+    r = requests.get(url=url, params=params)
+    return r.json()
+
 @router.post("/message", status_code=status.HTTP_201_CREATED)
 def chat(query: schemas.Query):
     similar_docs = llm_service.vector_search(query.query)
     template = llm_service.get_prompt_template()
-    formatted_template = template.format(similar_docs=similar_docs, query=query.query)  
+    google_fit_data = get_google_fit_data()
+    formatted_template = template.format(similar_docs=similar_docs, query=query.query, google_fit_data=google_fit_data)  
     result = llm_service.get_mistral(formatted_template)
     return {"output": result}
 
