@@ -1,7 +1,7 @@
 import React from 'react';
 import { ReactTyped } from 'react-typed';
 import './Login.css';
-import rightLogo from '../assests/rightlogologin.png'; // Correct the image path
+import rightLogo from '../assets/rightlogologin.png'; // Correct the image path
 
 const Login = () => {
 

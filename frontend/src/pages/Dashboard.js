@@ -28,11 +28,13 @@ const Dashboard = ({ accessToken }) => {
       reader.readAsDataURL(file);
     }
   };
-
+  
   const handlePromptSubmit = async () => {
-    let query = prompt.trim();
-    let combinedQuery = query.trim();
+    let combinedQuery = prompt.trim();
     const newConversation = currentConversation ? [...currentConversation] : [];
+    if(combinedQuery){
+      newConversation.push({ sender: 'You', message: combinedQuery });
+    }
   
     // Step 1: Handle image upload if there's an image
     if (image) {
@@ -60,7 +62,6 @@ const Dashboard = ({ accessToken }) => {
   
     // Proceed with sending the combined query to the /query/message endpoint
     if (combinedQuery !== '') {
-      newConversation.push({ sender: 'You', message: query });
       try {
         const response = await fetch('http://localhost:8000/query/message', {
           method: 'POST',
@@ -71,6 +72,12 @@ const Dashboard = ({ accessToken }) => {
           body: JSON.stringify({ query: combinedQuery }),
         });
         const result = await response.json();
+
+        setTimeout(() => {
+          setIsTyping(true);
+          simulateTyping(result.output, newConversation);
+        }, 10000);
+
         newConversation.push({ sender: 'AI', message: result.output });
       } catch (error) {
         console.error('Error fetching AI response:', error);
@@ -78,8 +85,9 @@ const Dashboard = ({ accessToken }) => {
       }
     }
   
-    // Update the conversation and reset the prompt
+
     setCurrentConversation(newConversation);
+
     setPrompt('');
   };
 
