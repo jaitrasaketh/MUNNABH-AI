@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Dashboard.css';
-import logo from '../assests/AIlogo.png';
+import logo from '../assets/AIlogo.png';
 
 const Dashboard = ({ accessToken }) => {
   const [prompt, setPrompt] = useState('');
