@@ -1,17 +1,12 @@
-// src/pages/Login.js
-
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ReactTyped } from 'react-typed'; // Import ReactTyped as a named import
+import { ReactTyped } from 'react-typed';
 import './Login.css';
 import rightLogo from '../assests/rightlogologin.png'; // Correct the image path
 
 const Login = () => {
-    const navigate = useNavigate();
 
     const handleGoogleLogin = () => {
-        // Simulate login and redirect to dashboard
-        navigate('/dashboard');
+        window.location.href = "http://localhost:8000/auth/login?redirect_uri=http://localhost:3000/auth"; // Redirect to FastAPI OAuth login endpoint with redirect URI
     };
 
     return (
