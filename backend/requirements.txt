@@ -13,7 +13,7 @@ nibabel
 matplotlib
 protobuf==3.19.6
 authlib
-tenacity==8.3.0
+tenacity==8.4.1
 # For local deployment of llm model
 # llama-cpp-python
 
