@@ -30,8 +30,8 @@ const Login = () => {
                     <div className="button-container">
                         <button onClick={handleGoogleLogin}>Continue With Google</button>
                     </div>
-                    <div className="button-container">
-                        <button>Continue With Microsoft Account</button>
+                    <div className="info-text">
+                        <p>Set up Google Fit and create an account to enhance diagnosis accuracy.</p>
                     </div>
                 </div>
                 <div className="right-logo-container">
