@@ -16,7 +16,7 @@ MunnaBh-AI is an AI-driven healthcare chatbot designed to assist in diagnosing, 
 
 ## Features
 - Google OAuth Login for secure user authentication.
-- Integration with Google Fit to gather health data.
+- Integration with Google Fit using NoCode API to gather health data.
 - Support for uploading X-rays and MRI scans for analysis.
 - Diagnosis, treatment recommendations, and medical information delivery.
 
