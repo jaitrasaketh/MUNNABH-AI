@@ -1,12 +1,12 @@
 sentence-transformers
+keras==2.8.0rc
 pinecone-client
-langchain
 langchain-community
+langchain
 langchain_pinecone
+tensorflow==2.8.0
 fastapi[all]
 mistralai
-tensorflow==2.8.0
-keras==2.8.0rc
 pandas
 numpy
 nibabel
