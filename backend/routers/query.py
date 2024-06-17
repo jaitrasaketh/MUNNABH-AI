@@ -1,14 +1,13 @@
 from fastapi import status, HTTPException, APIRouter
 from .. import schemas
-from ..llm_service import LLMService
+from ..service.llm_service import LLMService
 
 # To load the CNN models
 from fastapi import UploadFile, File
 from fastapi.responses import JSONResponse
 import tensorflow as tf
-from ..cnn_service import CNNService
-import nibabel as nib
-import numpy as np
+from ..service.cnn_service import CNNService
+
 
 router = APIRouter()
 
@@ -31,25 +30,13 @@ async def classify_xray(file: UploadFile = File(...)):
     contents = await file.read()
     image = tf.image.decode_image(contents, channels=3)
     predictions = cnn_service.classify_xray(image)
-    labels = ['Cardiomegaly', 'Emphysema', 'Effusion', 'Hernia', 'Infiltration', 'Mass', 'Nodule', 'Atelectasis', 'Pneumothorax', 'Pleural_Thickening', 'Pneumonia', 'Fibrosis', 'Edema', 'Consolidation']
+    labels = ['Cardiomegaly', 'Emphysema', 'Effusion', 'Hernia',
+            'Infiltration', 'Mass', 'Nodule', 'Atelectasis',
+            'Pneumothorax', 'Pleural_Thickening', 'Pneumonia',
+            'Fibrosis', 'Edema', 'Consolidation']
     result = {label: float(pred) for label, pred in zip(labels, predictions[0])}
     return JSONResponse(content=result)
 
-@router.post("/segment_mri/")
-async def segment_mri(file: UploadFile = File(...)):
-    contents = await file.read()
-    with open("temp_image.nii", "wb") as f:
-        f.write(contents)
-    
-    image_nifty_file = "temp_image.nii"
-    image = np.array(nib.load(image_nifty_file).get_fdata())
-    image = np.expand_dims(image, axis=-1)
-    image = np.expand_dims(image, axis=0)
-    
-    prediction = cnn_service.segment_mri(image)
-    result = prediction[0]  # Convert this to appropriate response format
-
-    return JSONResponse(content={"segmentation_result": result.tolist()})
 
 @router.post("/select/{template_name}", status_code=status.HTTP_200_OK)
 def select_template(template_name: str):

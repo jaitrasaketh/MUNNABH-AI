@@ -1,11 +1,11 @@
-from .config import Config
-from .src.helper import download_embedding
+from ..config import Config
+from ..src.helper import download_embedding
 from langchain_pinecone import PineconeVectorStore
-from .src.prompt_templates import *
+from ..src.prompt_templates import *
 
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
-import os
+
 
 # Legacy imports
 # from langchain_community.llms import LlamaCpp
