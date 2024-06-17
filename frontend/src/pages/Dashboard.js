@@ -76,7 +76,7 @@ const Dashboard = ({ accessToken }) => {
         setTimeout(() => {
           setIsTyping(true);
           simulateTyping(result.output, newConversation);
-        }, 10000);
+        }, 1000);
 
         newConversation.push({ sender: 'AI', message: result.output });
       } catch (error) {
@@ -108,7 +108,7 @@ const Dashboard = ({ accessToken }) => {
         clearInterval(interval);
         setIsTyping(false);
       }
-    }, 50);
+    }, 10);
   };
 
   const adjustTextareaHeight = () => {
