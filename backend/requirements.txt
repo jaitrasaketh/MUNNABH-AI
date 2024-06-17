@@ -13,6 +13,7 @@ numpy
 nibabel
 matplotlib
 protobuf==3.19.6
+authlib
 
 # For local deployment of llm model
 # llama-cpp-python

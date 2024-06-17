@@ -1,6 +1,6 @@
 class diagnosis:
     template = """
-        Use the following pieces of information give diagnosis to the user's question.
+        Use the following pieces of information give diagnosis and prognosis to the user's question.
         If you don't know the answer, Give me the most probable answer.
 
         Context: {similar_docs}
@@ -10,9 +10,9 @@ class diagnosis:
         Helpful answer:
     """
 
-class prognosis:
+class treat:
     template = """
-        Use the following pieces of information give prognosis the user's question.
+        Use the following pieces of information give treatment the user's question.
         If you don't know the answer, Give me the most probable answer.
 
         Context: {similar_docs}

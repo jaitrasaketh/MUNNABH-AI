@@ -42,8 +42,8 @@ class LLMService:
 
     def change_prompt_template(self, template_name):
         templates = {
-            "diagnosis": diagnosis.template,
-            "prognosis": prognosis.template,
+            "diagnose": diagnosis.template,
+            "treat": treat.template,
             "ask": ask.template
         }
         if template_name in templates:
