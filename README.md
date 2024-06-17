@@ -29,8 +29,8 @@ Briefly describe the architecture of MunnaBh-AI, including the main components a
 ## Installation
 ### Prerequisites
 - Node.js
-- Python
-- Google Fit app (preferable)
+- Python (3.10)
+- Google Fit app (Not mandatory)
 
 ### Steps
 1. Clone the repository:
@@ -40,10 +40,19 @@ Briefly describe the architecture of MunnaBh-AI, including the main components a
 2. Install dependencies:
    ```sh
     npm install
-    pip install -r requirements.txt
+    pip install -r backend\requirements.txt
 3. Start the application:
-   - uvicorn main:app --reload to start the backend.
-   - npm start to start the frontend.
+- To start the server from backend
+   ```sh
+    uvicorn backend.main:app --reload
+   ```
+- To start the frontend from backend/frontend
+   ```sh
+    npm install
+   ``` 
+   ```sh
+    npm start
+   ``` 
 
 ### Usage
 1. Start the application.
