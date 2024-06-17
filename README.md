@@ -28,8 +28,9 @@ Briefly describe the architecture of MunnaBh-AI, including the main components a
 
 ## Installation
 ### Prerequisites
-- [List any prerequisites, e.g., Node.js, Python, Docker, etc.]
-- Google API credentials for OAuth and Fit integration
+- Node.js
+- Python
+- Google Fit app (preferable)
 
 ### Steps
 1. Clone the repository:
