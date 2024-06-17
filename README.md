@@ -22,10 +22,9 @@ MunnaBh-AI is an AI-driven healthcare chatbot designed to assist in diagnosing, 
 
 ## Architecture
 Briefly describe the architecture of MunnaBh-AI, including the main components and how they interact:
-- **Frontend:** Developed using [framework/library]
-- **Backend:** Powered by [framework/library]
-- **Database:** [Database system used]
-- **AI Model:** Custom-built LLM using [framework/library]
+- **Frontend:** Developed using React.js
+- **Backend:** Powered by FastAPI
+- **AI Model:** Custom-built LLM using mistral AI with pincone vector database to create embeddings.
 - **Integration:** Google OAuth, Google Fit API
 
 ## Installation
@@ -38,3 +37,9 @@ Briefly describe the architecture of MunnaBh-AI, including the main components a
    ```sh
    git clone https://github.com/yourusername/MunnaBh-AI.git
    cd MunnaBh-AI
+2. Install dependencies:
+   ```sh
+    npm install
+    pip install -r requirements.txt]
+
+     
