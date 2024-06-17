@@ -1,8 +1,7 @@
-sentence-transformers==2.6.0
+sentence-transformers
 pinecone-client
 langchain
 langchain-community
-langchain-huggingface
 langchain_pinecone
 fastapi[all]
 mistralai
@@ -14,7 +13,7 @@ nibabel
 matplotlib
 protobuf==3.19.6
 authlib
-
+tenacity==8.3.0
 # For local deployment of llm model
 # llama-cpp-python
 
