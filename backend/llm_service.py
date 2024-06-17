@@ -1,15 +1,17 @@
 from .config import Config
 from .src.helper import download_embedding
 from langchain_pinecone import PineconeVectorStore
-# from langchain_community.llms import LlamaCpp
-# from langchain_core.prompts import ChatPromptTemplate
-# from langchain.chains.combine_documents import create_stuff_documents_chain
-# from langchain.chains import create_retrieval_chain
 from .src.prompt_templates import *
 
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
 import os
+
+# Legacy imports
+# from langchain_community.llms import LlamaCpp
+# from langchain_core.prompts import ChatPromptTemplate
+# from langchain.chains.combine_documents import create_stuff_documents_chain
+# from langchain.chains import create_retrieval_chain
 
 class LLMService:
     

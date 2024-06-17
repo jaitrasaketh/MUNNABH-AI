@@ -10,7 +10,7 @@ class CNNService:
 
     def load_models(self):
         self.xray_model = load_model('./backend/model/chest_model.h5')
-        # self.mri_model = load_model('path_to_mri_model.h5', custom_objects={'soft_dice_loss': self.soft_dice_loss, 'dice_coefficient': self.dice_coefficient})
+        # self.mri_model = load_model('./backend/model/brats_model.h5', custom_objects={'soft_dice_loss': self.soft_dice_loss, 'dice_coefficient': self.dice_coefficient})
 
     @staticmethod
     def dice_coefficient(y_true, y_pred, smooth=1):
