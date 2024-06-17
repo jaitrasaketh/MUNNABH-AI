@@ -51,7 +51,7 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 100px;
-  margin-top: 30px; /* Add margin-top to create space below Treat button */
+  margin-top: 30px;
 }
 
 .prompt-area textarea {
@@ -120,8 +120,8 @@
 }
 
 .logo-image {
-  width: 200px; /* Adjust size as needed */
-  margin-bottom: 10px; /* Add spacing between the logo and the Treat button */
+  width: 200px;
+  margin-bottom: 10px;
 }
 
 .action-button {
@@ -131,8 +131,8 @@
   border-radius: 5px;
   padding: 25px 35px;
   cursor: pointer;
-  width: 150px; /* Fixed width for all buttons */
-  height: 60px; /* Fixed height for all buttons */
+  width: 150px;
+  height: 60px;
   text-align: center;
 }
 
@@ -146,20 +146,30 @@
   border-radius: 10px;
   padding: 20px;
   margin-top: -60px;
-  max-height: 300px;
+  max-height: 390px; /* Increased from 300px to 390px */
   overflow-y: auto;
 }
 
 .chat-message {
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .chat-message.User {
-  text-align: left;
+  justify-content: flex-end;
+  text-align: right;
 }
 
 .chat-message.AI {
-  text-align: right;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.chat-message img {
+  max-width: 100%;
+  max-height: 150px;
+  margin: 10px 0;
 }
 
 .new-conversation {
@@ -183,10 +193,4 @@
 
 .new-conversation-button:hover {
   background-color: #243724;
-}
-
-.image-preview {
-  max-width: 100%;
-  max-height: 150px;
-  margin: 10px 0;
 }
