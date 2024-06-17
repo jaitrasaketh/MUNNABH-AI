@@ -50,7 +50,7 @@ Briefly describe the architecture of MunnaBh-AI, including the main components a
 3. Interact with the chatbot to input symptoms, upload medical images, and receive diagnoses and recommendations.
 
 ### License
-This project is licensed under the terms of the [MIT License](MIT License.md)
+This project is licensed under the terms of the [MIT License](LICENSE.md)
 
 ### Contributors
   - Sri Jaitra Saketh Goparaju  f20220183@hyderabad.bits-pilani.ac.in
