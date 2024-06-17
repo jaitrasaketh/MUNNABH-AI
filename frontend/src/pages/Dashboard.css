@@ -4,6 +4,26 @@
   min-height: 100vh;
   background-color: #bee8bd;
   padding: 20px;
+  position: relative;
+}
+
+.logout-button-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.logout-button {
+  background-color: #02bd9b;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%; /* Rounded border radius */
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #029a87;
 }
 
 .menu {
@@ -146,30 +166,21 @@
   border-radius: 10px;
   padding: 20px;
   margin-top: -60px;
-  max-height: 390px; /* Increased from 300px to 390px */
+  max-height: calc(100vh - 300px); /* Adjusted for increased chat area height */
   overflow-y: auto;
 }
 
 .chat-message {
   margin-bottom: 10px;
-  display: flex;
-  align-items: center;
+  word-wrap: break-word;
 }
 
 .chat-message.User {
-  justify-content: flex-end;
   text-align: right;
 }
 
 .chat-message.AI {
-  justify-content: flex-start;
   text-align: left;
-}
-
-.chat-message img {
-  max-width: 100%;
-  max-height: 150px;
-  margin: 10px 0;
 }
 
 .new-conversation {
@@ -193,4 +204,10 @@
 
 .new-conversation-button:hover {
   background-color: #243724;
+}
+
+.image-preview {
+  max-width: 100%;
+  max-height: 150px;
+  margin: 10px 0;
 }
