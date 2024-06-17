@@ -35,8 +35,8 @@ Briefly describe the architecture of MunnaBh-AI, including the main components a
 ### Steps
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/MunnaBh-AI.git
-   cd MunnaBh-AI
+   git clone https://github.com/reddy-j-harshith/MS-MUNNABH-AI.git
+   cd MS-MUNNABH-AI
 2. Install dependencies:
    ```sh
     npm install
