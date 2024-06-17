@@ -14,8 +14,6 @@ matplotlib
 protobuf==3.19.6
 authlib
 tenacity==8.4.1
-google-auth
-google-api-python-client
 # For local deployment of llm model
 # llama-cpp-python
 
