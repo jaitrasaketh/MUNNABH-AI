@@ -36,6 +36,7 @@ const Dashboard = ({ accessToken }) => {
       newConversation.push({ sender: 'You', message: combinedQuery });
     }
 
+    // Step 1: Handle image upload if there's an image
     if (image) {
       newConversation.push({ sender: 'You', image });
       const formData = new FormData();
@@ -49,14 +50,17 @@ const Dashboard = ({ accessToken }) => {
           body: formData,
         });
         const result = await response.json();
+        // Append the output of the image upload to the user's query
         combinedQuery += " These are the results of the Chest-Xray. Please answer with the top 2 (or 3 if it is significant and do not give out the probabilities) most probable diagnosis in order that you can give (in 150 words): " + JSON.stringify(result);
+        // Removed the part where the x-ray classification result is added to the conversation
       } catch (error) {
         console.error('Error uploading image:', error);
         newConversation.push({ sender: 'AI', message: 'Error processing image.' });
       }
-      setImage(null);
+      setImage(null); // Reset image after submission
     }
 
+    // Proceed with sending the combined query to the /query/message endpoint
     if (combinedQuery !== '') {
       try {
         const response = await fetch('http://localhost:8000/query/message', {
@@ -69,12 +73,11 @@ const Dashboard = ({ accessToken }) => {
         });
         const result = await response.json();
 
-        setTimeout(() => {
-          setIsTyping(true);
-          simulateTyping(result.output, newConversation);
-        }, 10000);
+        setIsTyping(true); // Start typing animation
+        await simulateTyping(result.output, newConversation); // Await typing animation completion
 
-        newConversation.push({ sender: 'AI', message: result.output });
+        newConversation.push({ sender: 'AI', message: result.output }); // Push final AI message
+
       } catch (error) {
         console.error('Error fetching AI response:', error);
         newConversation.push({ sender: 'AI', message: 'Sorry, something went wrong.' });
@@ -82,28 +85,25 @@ const Dashboard = ({ accessToken }) => {
     }
 
     setCurrentConversation(newConversation);
-
     setPrompt('');
   };
 
-  const simulateTyping = (message, conversation) => {
+  const simulateTyping = async (message, conversation) => {
     let index = 0;
-    const interval = setInterval(() => {
-      if (index < message.length) {
-        const currentMessage = message.substring(0, index + 1);
-        const updatedConversation = [...conversation];
-        if (updatedConversation[updatedConversation.length - 1]?.sender === 'AI') {
-          updatedConversation[updatedConversation.length - 1].message = currentMessage;
-        } else {
-          updatedConversation.push({ sender: 'AI', message: currentMessage });
-        }
-        setCurrentConversation(updatedConversation);
-        index++;
+    const typingSpeed = 15; // Adjust the speed of typing
+    while (index <= message.length) {
+      const currentMessage = message.substring(0, index);
+      const updatedConversation = [...conversation];
+      if (updatedConversation[updatedConversation.length - 1]?.sender === 'AI') {
+        updatedConversation[updatedConversation.length - 1].message = currentMessage;
       } else {
-        clearInterval(interval);
-        setIsTyping(false);
+        updatedConversation.push({ sender: 'AI', message: currentMessage });
       }
-    }, 10);
+      setCurrentConversation(updatedConversation);
+      index++;
+      await new Promise(resolve => setTimeout(resolve, typingSpeed));
+    }
+    setIsTyping(false);
   };
 
   const adjustTextareaHeight = () => {
@@ -144,9 +144,12 @@ const Dashboard = ({ accessToken }) => {
     });
   };
 
+  // log out logic
   const handleLogout = () => {
-    // Handle logout logic here
     console.log('Logout button clicked');
+    localStorage.removeItem('accessToken');
+    // Redirect to the login page
+    window.location.href = 'http://localhost:3000/';
   };
 
   const triggerFileInput = () => {
